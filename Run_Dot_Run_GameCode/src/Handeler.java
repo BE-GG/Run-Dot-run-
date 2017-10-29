@@ -5,7 +5,7 @@ import runDotRun.Objects.GameObject;
 
 public class Handeler {
 	
-	private LinkedList<GameObject> objects;
+	LinkedList<GameObject> objects;
 	private GameObject temp;
 	
 	public Handeler() {

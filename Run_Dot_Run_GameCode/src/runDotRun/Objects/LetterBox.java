@@ -1,5 +1,6 @@
 package runDotRun.Objects;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.util.LinkedList;
 
@@ -18,7 +19,8 @@ public class LetterBox extends GameObject{
 
 	@Override
 	public void draw(Graphics g) {
-		// TODO Auto-generated method stub
+		g.setColor(Color.BLACK);
+		g.fillRect((int)posX, (int)posY, 32, 32);
 		
 	}
 

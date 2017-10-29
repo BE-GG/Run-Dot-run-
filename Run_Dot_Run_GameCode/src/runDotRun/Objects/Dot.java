@@ -1,24 +1,32 @@
 package runDotRun.Objects;
+import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.event.KeyEvent;
 import java.util.LinkedList;
 
 public class Dot extends GameObject{
+	
+	private final int RADIUS = 32;
+	private final int GRAVITY = 0;
 
 	public Dot(float posX, float posY, ObjectId id) {
 		super(posX, posY, id);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public void update(LinkedList<GameObject> objects) {
-		// TODO Auto-generated method stub
+		posX += velX;
+		posY += velY;
 		
+		if(falling || jumping) {
+			posY += GRAVITY;
+		}
 	}
 
 	@Override
 	public void draw(Graphics g) {
-		// TODO Auto-generated method stub
-		
+		g.setColor(Color.BLACK);
+		g.fillOval((int)posX, (int)posY, RADIUS, RADIUS);
 	}
 
 }
