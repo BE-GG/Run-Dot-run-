@@ -1,21 +1,27 @@
 package runDotRun.Objects;
 
 import java.awt.Graphics;
+import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
 import java.util.LinkedList;
 
 public abstract class GameObject {
 	
 	protected float posX, posY;
 	protected float velX, velY;
-	protected boolean jumping, falling;
+	protected int height, width;
+	protected boolean jumping, falling, doubleJumping;
+	protected BufferedImage image;
 	protected ObjectId id;
-	
-	public GameObject(float posX, float posY, ObjectId id) {
+	public GameObject(float posX, float posY, int width, int height, ObjectId id) {
 		this.posX = posX;
 		this.posY = posY;
 		this.id = id;
 		this.jumping = false;
 		this.falling = true;
+		this.height = height;
+		this.width = width;
+		doubleJumping = false;
 		
 		velX = 0;
 		velY = 0;
@@ -23,6 +29,31 @@ public abstract class GameObject {
 	
 	public abstract void update(LinkedList<GameObject> objects);
 	public abstract void draw(Graphics g);
+	public abstract Rectangle getBounds();
+	
+	public BufferedImage getImage() {
+		return image;
+	}
+
+	public void setImage(BufferedImage image) {
+		this.image = image;
+	}
+	
+	public int getHeight() {
+		return height;
+	}
+
+	public void setHeight(int height) {
+		this.height = height;
+	}
+
+	public int getWidth() {
+		return width;
+	}
+
+	public void setWidth(int width) {
+		this.width = width;
+	}
 	
 	public void setPosX(float posX) {
 		this.posX = posX;
@@ -54,10 +85,10 @@ public abstract class GameObject {
 		return id;
 	}
 	
-	public void setfalling(boolean falling) {
+	public void setFalling(boolean falling) {
 		this.falling = falling;
 	}
-	public boolean getfalling() {
+	public boolean getFalling() {
 		return falling;
 	}
 	
@@ -67,5 +98,11 @@ public abstract class GameObject {
 	public boolean getjumping() {
 		return jumping;
 	}
-	
+	public boolean isDoubleJumping() {
+		return doubleJumping;
+	}
+
+	public void setDoubleJumping(boolean doubleJumping) {
+		this.doubleJumping = doubleJumping;
+	}
 }

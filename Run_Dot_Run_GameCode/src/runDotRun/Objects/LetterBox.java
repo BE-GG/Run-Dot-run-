@@ -2,12 +2,13 @@ package runDotRun.Objects;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.util.LinkedList;
 
 public class LetterBox extends GameObject{
 
-	public LetterBox(float posX, float posY, ObjectId id) {
-		super(posX, posY, id);
+	public LetterBox(float posX, float posY, int width, int height, ObjectId id) {
+		super(posX, posY, width, height, id);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -23,5 +24,10 @@ public class LetterBox extends GameObject{
 		g.fillRect((int)posX, (int)posY, 32, 32);
 		
 	}
+	
+	public Rectangle getBounds() {
+		return (new Rectangle((int)posX, (int)posY, 32, 32));
+	}
+
 
 }
