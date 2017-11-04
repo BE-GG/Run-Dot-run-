@@ -40,6 +40,7 @@ public class Eraser extends GameObject{
 	}
 
 	public Rectangle getBounds() {
+		
 
 		return null;
 	}

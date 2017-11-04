@@ -13,7 +13,8 @@ import GameControl.CollisionDetection;
 
 public class Dot extends GameObject{
 	
-	private final int RADIUS = 32;
+	//private final int RADIUS = 32;
+	private int radius;
 	private final int GRAVITY = 5;
 	private final int MAX_VEL = 10;
 	private int initialX;
@@ -26,16 +27,19 @@ public class Dot extends GameObject{
 		initialX = (int) posX;
 		initialY = (int) posY;
 		collision = new CollisionDetection();
-		//collision = new CollisionDetection(null);
+		radius = width;
+		collision = new CollisionDetection();
 		//this.handeler = handeler;
 	}
 
 	@Override
 	public void update(LinkedList<GameObject> objects) {
+		
 		posX += velX;
 		posY += velY;
 		
-		if(falling || jumping) {
+		if(getFalling() || getjumping()) {
+			//System.out.println("Falling= " + getFalling() + "	" + "Jumping= " + getjumping());
 			posY += GRAVITY;
 			
 			if(velY >= MAX_VEL)
@@ -48,7 +52,7 @@ public class Dot extends GameObject{
 	}
 	
 	public int getRadius() {
-		return RADIUS;
+		return radius;
 	}
 	
 	public void detectCollision(LinkedList<GameObject> objects){
@@ -58,23 +62,23 @@ public class Dot extends GameObject{
 			if(temp.getId() == ObjectId.LetterBox) {
 				if(getBoundaryBottom().intersects(temp.getPosX(), temp.getPosY(), 32, 32)) {
 					velY = 0;
-					posY = temp.getPosY() - RADIUS;
+					posY = temp.getPosY() - radius;
 					setFalling(false);
 					setJumping(false);
 				}
 				else
-					setFalling(true);
+					//setFalling(true);
 				if(getBoundaryTop().intersects(temp.getPosX(), temp.getPosY(), 32, 32)) {
 					velY = 0;
-					posY = temp.getPosY() + RADIUS;
+					posY = temp.getPosY() + radius;
 				}
 				if(getBoundaryR().intersects(temp.getPosX(), temp.getPosY(), 32, 32)) {
 					velX = 0;
-					posX = temp.getPosX() - RADIUS;
+					posX = temp.getPosX() - radius;
 				}
 				if(getBoundaryL().intersects(temp.getPosX(), temp.getPosY(), 32, 32)) {
 					velX = 0;
-					posX = temp.getPosX() + RADIUS;
+					posX = temp.getPosX() + radius;
 				}
 			}
 			if(temp.getId() == ObjectId.Spike) {
@@ -125,20 +129,13 @@ public class Dot extends GameObject{
 	}
 
 	public int getRADIUS() {
-		return RADIUS;
+		return radius;
 	}
 
 	@Override
 	public void draw(Graphics g) {
 		g.setColor(Color.BLACK);
-		g.fillOval((int)posX, (int)posY, RADIUS, RADIUS);
-		
-		/*Graphics2D g2d = (Graphics2D) g;
-		g2d.setColor(Color.CYAN);
-		g2d.draw(getBoundaryTop());
-		g2d.draw(getBoundaryR());
-		g2d.draw(getBoundaryL());
-		g2d.draw(getBoundaryBottom());*/
+		g.fillOval((int)posX, (int)posY, radius, radius);
 		
 	}
 	
@@ -149,16 +146,16 @@ public class Dot extends GameObject{
 	}*/
 
 	public Arc2D getBoundaryBottom() {
-		return (new Arc2D.Double((double)posX, (double)posY, (double)RADIUS, (double)RADIUS, 225.0, 90.0, Arc2D.CHORD));
+		return (new Arc2D.Double((double)posX, (double)posY, (double)radius, (double)radius, 225.0, 90.0, Arc2D.CHORD));
 	}
 	public Arc2D getBoundaryTop() {
-		return (new Arc2D.Double((double)posX, (double)posY, (double)RADIUS, (double)RADIUS, 45.0, 90.0, Arc2D.CHORD));
+		return (new Arc2D.Double((double)posX, (double)posY, (double)radius, (double)radius, 45.0, 90.0, Arc2D.CHORD));
 	}
 	public Arc2D getBoundaryR() {
-		return (new Arc2D.Double((double)posX, (double)posY, (double)RADIUS, (double)RADIUS, -45.0, 90.0, Arc2D.CHORD));
+		return (new Arc2D.Double((double)posX, (double)posY, (double)radius, (double)radius, -45.0, 90.0, Arc2D.CHORD));
 	}
 	public Arc2D getBoundaryL() {
-		return (new Arc2D.Double((double)posX, (double)posY, (double)RADIUS, (double)RADIUS, 135.0, 90.0, Arc2D.CHORD));
+		return (new Arc2D.Double((double)posX, (double)posY, (double)radius, (double)radius, 135.0, 90.0, Arc2D.CHORD));
 	}
 	
 

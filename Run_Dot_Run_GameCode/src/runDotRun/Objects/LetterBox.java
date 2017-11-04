@@ -21,12 +21,12 @@ public class LetterBox extends GameObject{
 	@Override
 	public void draw(Graphics g) {
 		g.setColor(Color.BLACK);
-		g.fillRect((int)posX, (int)posY, 32, 32);
+		g.fillRect((int)posX, (int)posY, getWidth(), getHeight());
 		
 	}
 	
 	public Rectangle getBounds() {
-		return (new Rectangle((int)posX, (int)posY, 32, 32));
+		return (new Rectangle((int)posX, (int)posY, getWidth(), getHeight()));
 	}
 
 
