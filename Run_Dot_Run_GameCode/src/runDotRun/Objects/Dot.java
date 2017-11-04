@@ -20,6 +20,7 @@ public class Dot extends GameObject{
 	private int initialX;
 	private int initialY;
 	private CollisionDetection collision;
+	private int lives;
 	//private Handeler handeler;
 
 	public Dot(float posX, float posY, int width, int height, ObjectId id) {
@@ -29,7 +30,16 @@ public class Dot extends GameObject{
 		collision = new CollisionDetection();
 		radius = width;
 		collision = new CollisionDetection();
+		lives = 3;
 		//this.handeler = handeler;
+	}
+
+	public int getLives() {
+		return lives;
+	}
+
+	public void setLives(int lives) {
+		this.lives = lives;
 	}
 
 	@Override
