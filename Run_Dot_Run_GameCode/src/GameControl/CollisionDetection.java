@@ -61,6 +61,8 @@ public class CollisionDetection {
 				{
 					dot.setPosX(dot.getInitialX());
 					dot.setPosY(dot.getInitialY());
+					if(dot.getLives() > 0)
+						dot.setLives(dot.getLives()-1);
 				}
 				
 			}
@@ -72,6 +74,8 @@ public class CollisionDetection {
 				{
 					dot.setPosX(dot.getInitialX());
 					dot.setPosY(dot.getInitialY());
+					if(dot.getLives() > 0)
+						dot.setLives(dot.getLives()-1);
 				}
 				
 			}

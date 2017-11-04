@@ -8,6 +8,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GridBagConstraints;
+import java.awt.Image;
 import java.awt.Paint;
 import java.awt.PopupMenu;
 import java.awt.Shape;
@@ -50,8 +51,10 @@ public class GameManager extends Canvas implements Runnable, KeyListener{
 	private int clockTick = 0;
 	private boolean isGameOver;
 	private CollisionDetection detectCollision;
-	private GameObject dot;
+	private Dot dot;
 	private int level;
+	private BufferedImage lives;
+	private Image miniLives;
 	
 	public GameManager(int level){
 		setPreferredSize(new Dimension(1200,800));
@@ -61,6 +64,13 @@ public class GameManager extends Canvas implements Runnable, KeyListener{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		try {
+			lives = ImageIO.read(getClass().getResource("/life.png"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		miniLives = lives.getScaledInstance(32, 32, Image.SCALE_SMOOTH);
 		this.level = level;
 		objects = new LinkedList<GameObject>();
 		detectCollision = new CollisionDetection();
@@ -186,6 +196,12 @@ public class GameManager extends Canvas implements Runnable, KeyListener{
 		
 		g2D.translate(-camera.getPosX(), -camera.getPosY());
 		
+        if(miniLives != null) {
+        	int x = 32;
+	    	for(int i = 0; i < x*dot.getLives(); i += x)
+	    		g.drawImage(miniLives, i,40, this);
+        }
+		
 		g.setColor(Color.WHITE);
 		g.fillRoundRect(503, 50, 160, 70, 50, 50);
 		g.setColor(Color.BLACK);
@@ -300,6 +316,8 @@ public class GameManager extends Canvas implements Runnable, KeyListener{
 				if(temp.getPosY() > height) {
 					temp.setPosX(dotInitialPosX);
 					temp.setPosY(dotInitialPosY);
+					if(dot.getLives() > 0)
+						dot.setLives(dot.getLives()-1);
 				}
 			}
 		}
@@ -312,8 +330,12 @@ public class GameManager extends Canvas implements Runnable, KeyListener{
 	}
 	
 	public void checkGameOver() {
-		if(remainingTime <= 0)
+		if(remainingTime <= 0 || (dot.getLives() == 0))
+		{
 			isGameOver = true;
+			running = false;
+			//running = true;
+		}
 	}
 	
 	public boolean getGameOver() {
