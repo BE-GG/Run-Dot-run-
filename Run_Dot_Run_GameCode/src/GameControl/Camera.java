@@ -12,10 +12,14 @@ public class Camera {
 	}
 	
 	public void update(GameObject dot, int windowWidth, int dotInitialPosX) {
-		if(dot.getPosX() >= windowWidth/2)
+		if(dot.getPosX() >= windowWidth/2) {
 			posX = - dot.getPosX() + windowWidth/2;
-		else if(dot.getPosX() == dotInitialPosX)
+			//posY = - dot.getPosY() + windowHeight/2;
+		}
+		else if(dot.getPosX() == dotInitialPosX) {// && dot.getPosY() == dotInitialPosY) {
 			posX = - dot.getPosX() + dotInitialPosX;
+			//posY = - dot.getPosY() + dotInitialPosY;
+		}
 		
 	}
 	

@@ -24,7 +24,7 @@ public class MainMenu{
 		mainMenuFrame = new JFrame();
 		//mainMenuPanel = new MainMenuPanel();
 		//mainMenuFrame.add(mainMenuPanel);
-		game = new GameManager();
+		game = new GameManager(1);
 		//mainMenuFrame.add(game);
 		//mainPanel.add(game);
 		//mainPanel.add(new PausePanel());

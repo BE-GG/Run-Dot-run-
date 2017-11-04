@@ -31,6 +31,12 @@ public class LevelImageLoader {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			try {
+				images[2] = ImageIO.read(getClass().getResource("/curyLetter.png"));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		else if(level == 2) {
 			

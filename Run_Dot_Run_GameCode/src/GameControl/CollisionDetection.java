@@ -1,8 +1,10 @@
 package GameControl;
 
 import java.util.LinkedList;
+import java.util.Timer;
 
 import runDotRun.Objects.Dot;
+import runDotRun.Objects.FadingLetterBox;
 import runDotRun.Objects.GameObject;
 import runDotRun.Objects.ObjectId;
 
@@ -19,6 +21,7 @@ public class CollisionDetection {
 				dot = (Dot) objects.get(i);
 			}
 		}
+		
 	}
 	
 	public void collision(LinkedList<GameObject> objects){
@@ -29,7 +32,7 @@ public class CollisionDetection {
 			GameObject temp = objects.get(i);
 			
 			if(temp.getId() == ObjectId.LetterBox) {
-				if(dot.getBoundaryBottom().intersects(temp.getPosX(), temp.getPosY(), 32, 32)) {
+				if(dot.getBoundaryBottom().intersects(temp.getPosX(), temp.getPosY(), temp.getWidth(), temp.getHeight())) {
 					dot.setVelY(0);
 					dot.setPosY(temp.getPosY() - dot.getRadius());///;
 					dot.setFalling(false);
@@ -37,15 +40,15 @@ public class CollisionDetection {
 				}
 				else
 					dot.setFalling(true);
-				if(dot.getBoundaryTop().intersects(temp.getPosX(), temp.getPosY(), 32, 32)) {
+				if(dot.getBoundaryTop().intersects(temp.getPosX(), temp.getPosY(), temp.getWidth(), temp.getHeight())) {
 					dot.setVelY(0);
 					dot.setPosY(temp.getPosY() + dot.getRadius());
 				}
-				if(dot.getBoundaryR().intersects(temp.getPosX(), temp.getPosY(), 32, 32)) {
+				if(dot.getBoundaryR().intersects(temp.getPosX(), temp.getPosY(), temp.getWidth(), temp.getHeight())) {
 					dot.setVelX(0);
 					dot.setPosX(temp.getPosX() - dot.getRadius());
 				}
-				if(dot.getBoundaryL().intersects(temp.getPosX(), temp.getPosY(), 32, 32)) {
+				if(dot.getBoundaryL().intersects(temp.getPosX(), temp.getPosY(), temp.getWidth(), temp.getHeight())) {
 					dot.setVelX(0);
 					dot.setPosX(temp.getPosX() + dot.getRadius());
 				}
@@ -72,8 +75,38 @@ public class CollisionDetection {
 				}
 				
 			}
+			if(temp.getId() == ObjectId.FadingLetterBox) {
+				if(dot.getBoundaryBottom().intersects(temp.getPosX(), temp.getPosY(), temp.getWidth(), temp.getHeight()) || 
+						dot.getBoundaryTop().intersects(temp.getPosX(), temp.getPosY(), temp.getWidth(), temp.getHeight()) ||
+						dot.getBoundaryR().intersects(temp.getPosX(), temp.getPosY(), temp.getWidth(), temp.getHeight()) ||
+						dot.getBoundaryR().intersects(temp.getPosX(), temp.getPosY(), temp.getWidth(), temp.getHeight()))
+				{
+					if(dot.getBoundaryBottom().intersects(temp.getPosX(), temp.getPosY(), temp.getWidth(), temp.getHeight())) {
+						dot.setVelY(0);
+						dot.setPosY(temp.getPosY() - dot.getRadius());///;
+						dot.setFalling(false);
+						dot.setJumping(false);
+					}
+					else
+						dot.setFalling(true);
+					if(dot.getBoundaryTop().intersects(temp.getPosX(), temp.getPosY(), temp.getWidth(), temp.getHeight())) {
+						dot.setVelY(0);
+						dot.setPosY(temp.getPosY() + dot.getRadius());
+					}
+					if(dot.getBoundaryR().intersects(temp.getPosX(), temp.getPosY(), temp.getWidth(), temp.getHeight())) {
+						dot.setVelX(0);
+						dot.setPosX(temp.getPosX() - dot.getRadius());
+					}
+					if(dot.getBoundaryL().intersects(temp.getPosX(), temp.getPosY(), temp.getWidth(), temp.getHeight())) {
+						dot.setVelX(0);
+						dot.setPosX(temp.getPosX() + dot.getRadius());
+					}
+					temp.setVelY(8);
+				}
+					
+			}
+				
 		}
 	}
-
-
 }
+

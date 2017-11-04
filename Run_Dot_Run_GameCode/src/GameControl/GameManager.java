@@ -25,6 +25,7 @@ import javax.swing.JPanel;
 
 import runDotRun.Objects.Dot;
 import runDotRun.Objects.Eraser;
+import runDotRun.Objects.FadingLetterBox;
 import runDotRun.Objects.GameObject;
 import runDotRun.Objects.LetterBox;
 import runDotRun.Objects.ObjectId;
@@ -33,7 +34,6 @@ import runDotRun.Objects.Spike;
 public class GameManager extends Canvas implements Runnable, KeyListener{
 	
 	private LevelImageLoader imageLoader;
-	//private Handeler handeler;
 	private LinkedList<GameObject> objects;
 	private boolean running = false;
 	private Thread thread;
@@ -51,8 +51,9 @@ public class GameManager extends Canvas implements Runnable, KeyListener{
 	private boolean isGameOver;
 	private CollisionDetection detectCollision;
 	private GameObject dot;
+	private int level;
 	
-	public GameManager(){
+	public GameManager(int level){
 		setPreferredSize(new Dimension(1200,800));
 		try {
 			backgroundImage = ImageIO.read(getClass().getResource("/backgroundImageGamePlay.png"));
@@ -60,13 +61,13 @@ public class GameManager extends Canvas implements Runnable, KeyListener{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		this.level = level;
 		objects = new LinkedList<GameObject>();
 		detectCollision = new CollisionDetection();
 		remainingTime = 120;
 		camera = new Camera( 0, 0);
-		//handeler = new Handeler();
 		addKeyListener(this);
-		imageLoader = new LevelImageLoader(1);
+		imageLoader = new LevelImageLoader(level);
 		setFocusable(true);
 		levelImage = imageLoader.getRandomImage();
 		loadLevel(levelImage);
@@ -125,8 +126,15 @@ public class GameManager extends Canvas implements Runnable, KeyListener{
 		}
 	}
 	
+	public int getTimeRemaining() {
+		return remainingTime;
+	}
+	
 	private void update() { //tick
-		updateTimeRemaining();
+		checkGameOver();
+		if(!isGameOver) {
+			updateTimeRemaining();
+		}
 		clockTick++;
 		//System.out.println(dot.getPosX());
 		//detectCollision.collision(objects);
@@ -154,7 +162,7 @@ public class GameManager extends Canvas implements Runnable, KeyListener{
 	private void draw() {
 		BufferStrategy buffer = this.getBufferStrategy();
 		if(buffer == null) {
-			this.createBufferStrategy(3);
+			this.createBufferStrategy(2);
 			return;
 		}
 		
@@ -225,6 +233,10 @@ public class GameManager extends Canvas implements Runnable, KeyListener{
 				if(red == 0 && green == 255 && blue == 0)
 				{
 					addGameObject(new Eraser(i*32, j*32, 64, 64, ObjectId.Eraser));
+				}
+				if(red == 255 && green == 255 && blue == 0)
+				{
+					addGameObject(new FadingLetterBox(i*32, j*32, 32, 32, ObjectId.FadingLetterBox));
 				}
 			}
 		}
@@ -297,6 +309,11 @@ public class GameManager extends Canvas implements Runnable, KeyListener{
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	public void checkGameOver() {
+		if(remainingTime <= 0)
+			isGameOver = true;
 	}
 	
 	public boolean getGameOver() {
