@@ -48,7 +48,7 @@ public class MainMenu{
     mainMenuFrame.setVisible(true); 
     
     // shows main menu screen first
-    cardLayout.show( cardpanel, "2");
+    cardLayout.show( cardpanel, "1");
     
     // adds ActionListeners to all buttons
     mainMenuPanel.getButton("play").addActionListener( new MyActionListener() );
