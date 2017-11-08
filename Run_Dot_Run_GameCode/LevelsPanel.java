@@ -165,7 +165,7 @@ public class LevelsPanel extends JPanel{
      return null; 
   } 
   
-  public static void main( String[] args )
+  /*public static void main( String[] args )
   {
     JFrame mainMenuFrame = new JFrame();
     mainMenuFrame.add( new LevelsPanel() );
@@ -175,5 +175,5 @@ public class LevelsPanel extends JPanel{
     mainMenuFrame.setLocationRelativeTo(null); 
     mainMenuFrame.setVisible(true);
     mainMenuFrame.pack();
-  }     
+  }*/ 
 }
