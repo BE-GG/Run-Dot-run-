@@ -1,3 +1,4 @@
+package GameControl;
 import javax.imageio.ImageIO; 
 import javax.swing.*; 
 import java.awt.*; 
@@ -12,8 +13,10 @@ public class LevelsPanel extends JPanel{
   ImageIcon imgLocked;
   ImageIcon imgUnlocked;
   ImageIcon img;
-  JLabel unlocked;
-  JLabel locked;
+  JButton button1;
+  JButton button2;
+  JButton button3;
+  JButton button4;
   JLabel levels;
   JLabel num;
   JPanel top;
@@ -57,14 +60,23 @@ public class LevelsPanel extends JPanel{
     Image temp = img.getImage();
     temp = temp.getScaledInstance(200, 200,  java.awt.Image.SCALE_SMOOTH);
     imgUnlocked = new ImageIcon(temp);   
-    unlocked = new JLabel(imgUnlocked);
+    button1 = new JButton(imgUnlocked);
+    button1.setBorderPainted( false );
     
     //Locked level
     img = new ImageIcon( getClass().getResource("locked.png"));
     temp = img.getImage();
     temp = temp.getScaledInstance(200, 200,  java.awt.Image.SCALE_SMOOTH);
     imgLocked = new ImageIcon(temp);   
-    locked = new JLabel(imgLocked);
+    button2 = new JButton(imgLocked);
+    button2.setBorderPainted( false );
+    button2.setEnabled(false);
+    button3 = new JButton(imgLocked);
+    button3.setBorderPainted( false );
+    button3.setEnabled(false);
+    button4 = new JButton(imgLocked);
+    button4.setBorderPainted( false );
+    button4.setEnabled(false);
     
     //Back button
     img = new ImageIcon( getClass().getResource("back.png"));
@@ -72,21 +84,17 @@ public class LevelsPanel extends JPanel{
     temp = temp.getScaledInstance(50, 50,  java.awt.Image.SCALE_SMOOTH);
     img = new ImageIcon(temp);   
     back = new JButton(img);
+    back.setBorderPainted( false );
     
-    unlocked.setOpaque(false);
-    locked.setOpaque(false);
-    back.setOpaque(false);
-    
-    
-    
+       
     //Add components to panel
     top.add(Box.createRigidArea( new Dimension(30, 0)));
     top.add(back);
     middle.add( levels);
-    bottom.add( unlocked);
-    bottom.add( locked);
-    bottom.add( copyComponent("locked"));
-    bottom.add( copyComponent("locked"));
+    bottom.add( button1);
+    bottom.add( button2);
+    bottom.add( button3);
+    bottom.add( button4);
     
     levelNum.add(num1);
     levelNum.add(Box.createRigidArea( new Dimension(70, 0)));
@@ -107,28 +115,55 @@ public class LevelsPanel extends JPanel{
   }
   
   //Make a copy of level components
-  public JLabel copyComponent( String lock){
+  /*public JButton copyComponent( String lock){
     
-    JLabel temp = null;  
+    JButton temp = null;  
     if ( lock.equals("locked")){
-      temp = new JLabel(imgLocked);  
+      temp = new JButton(imgLocked);  
     }
     else if ( lock.equals("unlocked")){
-      temp = new JLabel(imgUnlocked); 
+      temp = new JButton(imgUnlocked); 
     } 
     return temp;
-  }
+  }*/
   
   //Change to lock or unlock
-  public void changeStatus(JLabel label, String lock){
+  public void changeStatus( JButton button){
     
-    if ( lock.equals("locked")){
-      label = new JLabel(imgUnlocked);  
+    if ( !button.isEnabled()){
+      button = new JButton(imgUnlocked); 
+      button.setEnabled(true);
     }
-    else if ( lock.equals("unlocked")){
-      label = new JLabel(imgLocked); 
+    else if ( button.isEnabled()){
+      button = new JButton(imgLocked);
+      button.setEnabled(false);      
     } 
   }
+  
+  public JButton getButton( String name) 
+  { 
+     if ( name.equals("back") ) 
+     { 
+       return back;  
+     } 
+     else if ( name.equals("button1") ) 
+     { 
+       return button1; 
+     }   
+     else if ( name.equals("button2") ) 
+     { 
+       return button2; 
+     }   
+     else if ( name.equals("button3") ) 
+     { 
+       return button3; 
+     }   
+     else if ( name.equals("button4") ) 
+     { 
+       return button4; 
+     }      
+     return null; 
+  } 
   
   public static void main( String[] args )
   {
