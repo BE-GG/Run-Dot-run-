@@ -1,9 +1,10 @@
-import javax.imageio.ImageIO; 
-import javax.swing.*; 
-import java.awt.*; 
-import java.awt.image.BufferedImage; 
-import java.io.File; 
-import java.io.IOException; 
+package GameControl;
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import javax.swing.border.*;
 
 
@@ -18,6 +19,7 @@ public class MainMenuPanel extends JPanel{
   JButton play;
   JButton credit;
   JButton quit;
+  JButton questionmark;
   
   public MainMenuPanel() { 
     
@@ -38,7 +40,7 @@ public class MainMenuPanel extends JPanel{
     temp = img.getImage();
     temp = temp.getScaledInstance(50, 50,  java.awt.Image.SCALE_SMOOTH);
     img = new ImageIcon(temp);   
-    JButton questionmark = new JButton(img);
+    questionmark = new JButton(img);
     
     help.add(Box.createRigidArea( new Dimension(30, 0)));
     help.add(volumeImage);
@@ -102,14 +104,34 @@ public class MainMenuPanel extends JPanel{
     
   } 
   
+  public JButton getButton( String name) 
+  { 
+     if ( name.equals("play") ) 
+     { 
+       return play;  
+     } 
+     else if ( name.equals("credit") ) 
+     { 
+       return credit; 
+     }   
+     else if ( name.equals("quit") ) 
+     { 
+       return quit; 
+     } 
+     else if ( name.equals("questionmark") ) 
+     { 
+       return questionmark; 
+     } 
+     return null; 
+  } 
+  
+  
   protected void paintComponent(Graphics g) { 
     super.paintComponent(g);
     g.drawImage( background, 0, 0, getWidth(), getHeight(), this);
   } 
   
-  
-  
-  public static void main( String[] args )
+  /*public static void main( String[] args )
   {
     JFrame mainMenuFrame = new JFrame();
     mainMenuFrame.add( new MainMenuPanel() );
@@ -119,5 +141,6 @@ public class MainMenuPanel extends JPanel{
     mainMenuFrame.setLocationRelativeTo(null); 
     mainMenuFrame.setVisible(true);
     mainMenuFrame.pack();
-  }     
+  }*/   
 } 
+
