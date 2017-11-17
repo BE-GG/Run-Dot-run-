@@ -1,1 +1,1 @@
-Parts of the analysis report of 2nd iteration are collected in thiss folder
+Parts of the analysis report of 2nd iteration are collected in this folder
