@@ -229,7 +229,7 @@ public class GameManager extends Canvas implements Runnable, KeyListener{
 		if(level == 5)
 		{
 			try {
-				backgroundImage = ImageIO.read(getClass().getResource("/backgroundImageGamePlay1.png"));
+				backgroundImage = ImageIO.read(getClass().getResource("/backgroundImageGamePlay3.png"));
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -548,6 +548,8 @@ public class GameManager extends Canvas implements Runnable, KeyListener{
 	
 	public void setGameOver(boolean isGameOver) {
 		this.isGameOver = isGameOver;
+		if(isGameOver == true)
+			setRunning(false);
 	}
 	
 	public void addGameObject(GameObject object) {
