@@ -135,10 +135,55 @@ public class MainMenu{
   {
     public void actionPerformed( ActionEvent e)
     {
-    	  if(game.getGameOver()) {
+    	if(game.getGameOver() && game.isPause())
+    	{
+    	    	cardLayout.show( cardpanel, "1");
+    	    	game.setGameOver(false);
+    	}
+    	else if(game.getGameOver()) {
+    		  if(game.isGameWon()) {
+    			  game.setGameWon(false);
+    	      	    String[] buttons = { "Play Again", "Play Next Level", "Exit To MainMenu"};
+
+    	      	    int rc = JOptionPane.showOptionDialog(null, "Congrats You Won!", "Game Won",
+    	      	        JOptionPane.WARNING_MESSAGE, 0, null, buttons, buttons[0]);
+    	      	    if(rc == 0) {
+    	      	    	game.start(game.getLevel());
+    	      	    	game.setGameOver(false);
+    	      	    }
+    	      	    else if(rc == 1)
+    	      	    {
+    	      	    	if(game.getLevel() != 5)
+    	      	    		game.start(game.getLevel() + 1);
+    	      	    	else
+    	      	    		game.start(game.getLevel());
+    	      		game.setGameOver(false);
+    	      	    }
+    	      	    else {
+    	      	    	cardLayout.show( cardpanel, "1");
+    	      	    	game.setGameOver(false);
+    	      	    }
+    		  }
+    		  else {
+  	      	    String[] buttons = { "Play Again", "Exit To MainMenu"};
+
+  	      	    int rc = JOptionPane.showOptionDialog(null, "Game Over", "Game Lost T_T",
+  	      	        JOptionPane.WARNING_MESSAGE, 0, null, buttons, buttons[0]);
+  	      	    if(rc == 0) {
+  	      	    	game.start(game.getLevel());
+  	      	    	game.setGameOver(false);
+  	      	    }
+  	      	    else
+  	      	    {
+  	      	    	cardLayout.show( cardpanel, "1");
+  	      	    	game.setGameOver(false);
+  	      	    }
+    		  }
+    		  /*
     		  cardLayout.show( cardpanel, "1");
-    		  game.setGameOver(false);
+    		  game.setGameOver(false);*/
     	  }
+    	
     		  
     }
   }
@@ -201,8 +246,27 @@ public class MainMenu{
         mainMenuFrame.dispose();
       }
       else if( pressedButton == pause){
-    	  game.setPause(!(game.isPause()));
-    	  System.out.println(game.isPause());
+    	  /*game.setPause(!(game.isPause()));
+    	  System.out.println(game.isPause());*/
+    	  if(game.isPause()) {
+    		  //game.setPause(false);
+    	  }
+    	  else {
+    		game.setPause(true);
+      	    String[] buttons = { "Resume", "Exit To MainMenu"};
+
+      	    int rc = JOptionPane.showOptionDialog(null, "Pause Panel", "Paused",
+      	        JOptionPane.WARNING_MESSAGE, 0, null, buttons, buttons[0]);
+      	    if(rc == 0)
+      	    	game.setPause(false);
+      	    else if(rc == 1)
+      	    {
+	      	    game.setGameOver(true);
+      	    }
+      	    else {
+      	    	game.setPause(false);
+      	    }
+    	  }
       }
     	  
     }
