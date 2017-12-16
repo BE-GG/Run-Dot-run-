@@ -6,7 +6,7 @@ import javax.imageio.ImageIO;
 
 public class LevelImageLoader {
 	
-	private final int IMAGE_NUM = 5;
+	private final int IMAGE_NUM = 3;
 	private BufferedImage[] images;
 	private int level;
 	
@@ -19,42 +19,59 @@ public class LevelImageLoader {
 	public void setImages(int level) {
 		//The images array will be filled according to the level
 		if(level == 1) { 
-			try {
-				images[0] = ImageIO.read(getClass().getResource("/Hello.png"));
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			try {
-				images[1] = ImageIO.read(getClass().getResource("/Level1Image1.png"));
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			try {
-				images[2] = ImageIO.read(getClass().getResource("/curyLetter.png"));
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			for(int i = 0; i < IMAGE_NUM; i++) {
+				try {
+					images[i] = ImageIO.read(getClass().getResource("/Level" + level + "Image" + (i+1) + ".png"));
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		}
 		else if(level == 2) {
-			
+			for(int i = 0; i < IMAGE_NUM; i++) {
+				try {
+					images[i] = ImageIO.read(getClass().getResource("/Level" + level + "Image" + (i+1) + ".png"));
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
 		}
 		else if(level == 3) {
-			
+			for(int i = 0; i < IMAGE_NUM; i++) {
+				try {
+					images[i] = ImageIO.read(getClass().getResource("/Level" + level + "Image" + (i+1) + ".png"));
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
 		}
 		else if(level == 4) {
-			
+			for(int i = 0; i < IMAGE_NUM; i++) {
+				try {
+					images[i] = ImageIO.read(getClass().getResource("/Level" + level + "Image" + (i+1) + ".png"));
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
 		}
-		else {
-			
+		else if(level == 5) {
+			for(int i = 0; i < IMAGE_NUM; i++) {
+				try {
+					images[i] = ImageIO.read(getClass().getResource("/Level" + 5 + "Image" + 1 + ".png"));
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
 		}
 	}
 	
 	public BufferedImage getRandomImage() {
 		//return random image from array
-		//return images[(int )(Math.random() * 4)];
-		return images[1];
+		return images[(int )(Math.random() * 3)];
 	}
 }
