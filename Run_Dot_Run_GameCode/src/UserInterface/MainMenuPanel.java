@@ -53,7 +53,7 @@ public class MainMenuPanel extends JPanel implements ActionListener{
     volume.setForeground(Color.BLACK);
     
     ////////////////////////////////////////////////
-	File soundFile = new File("Sound/jumping4.wav");
+	File soundFile = new File("Sound/Wintergatan_-_Marble_Machine_music_instrument_usin (1).wav");
 	try {
 		AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundFile);
 		try {
@@ -88,7 +88,7 @@ public class MainMenuPanel extends JPanel implements ActionListener{
 		}
 	});
 	
-	//clip.loop(Clip.LOOP_CONTINUOUSLY);  // repeat forever
+	clip.loop(Clip.LOOP_CONTINUOUSLY);  // repeat forever
     
     /////////////////////////////////////////////////
     
