@@ -15,7 +15,8 @@ public class FadingLetterBox extends LetterBox{
 	public void draw(Graphics g) {
 		g.setColor(Color.BLACK);
 		g.fillRect((int)posX, (int)posY, 32, 32);
-		
+		g.setColor(Color.WHITE);
+		g.drawRect((int)posX, (int)posY, getWidth(), getHeight());
 	}
 	
 	public void update(LinkedList<GameObject> objects) {

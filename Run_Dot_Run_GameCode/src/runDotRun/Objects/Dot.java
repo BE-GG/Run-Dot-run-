@@ -15,13 +15,13 @@ public class Dot extends GameObject{
 	
 	//private final int RADIUS = 32;
 	private int radius;
-	private final int GRAVITY = 5;
+	private final double GRAVITY = 0.2;
 	private final int MAX_VEL = 10;
 	private int initialX;
 	private int initialY;
 	private CollisionDetection collision;
 	private int lives;
-	//private Handeler handeler;
+	private boolean reachedFinishPoint;
 
 	public Dot(float posX, float posY, int width, int height, ObjectId id) {
 		super(posX, posY, width, height, id);
@@ -29,9 +29,15 @@ public class Dot extends GameObject{
 		initialY = (int) posY;
 		collision = new CollisionDetection();
 		radius = width;
-		collision = new CollisionDetection();
 		lives = 3;
-		//this.handeler = handeler;
+	}
+
+	public boolean isReachedFinishPoint() {
+		return reachedFinishPoint;
+	}
+
+	public void setReachedFinishPoint(boolean reachedFinishPoint) {
+		this.reachedFinishPoint = reachedFinishPoint;
 	}
 
 	public int getLives() {
@@ -49,14 +55,16 @@ public class Dot extends GameObject{
 		posY += velY;
 		
 		if(getFalling() || getjumping()) {
-			//System.out.println("Falling= " + getFalling() + "	" + "Jumping= " + getjumping());
-			posY += GRAVITY;
+			velY += GRAVITY;
 			
 			if(velY >= MAX_VEL)
 				velY = MAX_VEL;
 		}
 		
 		collision.collision(objects);
+		
+		if(collision.isGameWon())
+			setReachedFinishPoint(true);
 		//detectCollision(objects);
 		
 	}
@@ -65,7 +73,7 @@ public class Dot extends GameObject{
 		return radius;
 	}
 	
-	public void detectCollision(LinkedList<GameObject> objects){
+	/*public void detectCollision(LinkedList<GameObject> objects){
 		for(int i = 0; i < objects.size(); ++i) {
 			GameObject temp = objects.get(i);
 			
@@ -103,7 +111,7 @@ public class Dot extends GameObject{
 				
 			}
 		}
-	}
+	}*/
 	
 	/*public boolean dotIntersectsWithLetter(Rectangle letter) {
 		int rectXPos = (int) letter.getX();

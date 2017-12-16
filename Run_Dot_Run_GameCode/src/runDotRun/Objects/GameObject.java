@@ -10,7 +10,7 @@ public abstract class GameObject {
 	protected float posX, posY;
 	protected float velX, velY;
 	protected int height, width;
-	protected boolean jumping, falling, doubleJumping;
+	protected boolean jumping, falling;
 	protected BufferedImage image;
 	protected ObjectId id;
 	public GameObject(float posX, float posY, int width, int height, ObjectId id) {
@@ -21,7 +21,6 @@ public abstract class GameObject {
 		this.falling = true;
 		this.height = height;
 		this.width = width;
-		doubleJumping = false;
 		
 		velX = 0;
 		velY = 0;
@@ -97,12 +96,5 @@ public abstract class GameObject {
 	}
 	public boolean getjumping() {
 		return jumping;
-	}
-	public boolean isDoubleJumping() {
-		return doubleJumping;
-	}
-
-	public void setDoubleJumping(boolean doubleJumping) {
-		this.doubleJumping = doubleJumping;
 	}
 }
